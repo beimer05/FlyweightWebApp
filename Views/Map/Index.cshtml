@@ -1,0 +1,16 @@
+﻿@model List<TreeViewModel>
+
+	<h2>Park Trees</h2>
+<div style="display:flex; flex-wrap:wrap">
+	@foreach (var tree in Model)
+	{
+		<div class="tree-item" style="margin: 10px; border: 1px solid #ccc; padding: 10px; width: 200px;">
+			<img src="@tree.IconPath" alt="@tree.TreeName" width="40" />
+            <p><strong>@tree.TreeName</strong> </p>
+			<span style="color:@tree.Color">@tree.Color</span>
+			<p>Lat: @tree.Latitude</p>
+			<p>Long: @tree.Longitude</p>
+			
+		</div>
+	}
+</div>
