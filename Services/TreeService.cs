@@ -11,9 +11,9 @@ namespace FlyweightWebApp.Services
 
         private readonly Dictionary<string,(string color,string iconPath)> _speciesCatalog = new Dictionary<string, (string color, string iconPath)>
         {
-            { "Oak", ("Green", "~/image/Oak.png") },
-            { "Pine", ("DarkGreen", "~/image/Pine.png") },
-            { "Maple", ("Brown", "~/image/Maple.png") }
+            { "Oak", ("Green", "/image/Oak.png") },
+            { "Pine", ("DarkGreen", "/image/Pine.png") },
+            { "Maple", ("Brown", "/image/Maple.png") }
         };
 
         public TreeService()
