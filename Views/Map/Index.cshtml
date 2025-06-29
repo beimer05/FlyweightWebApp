@@ -1,16 +1,42 @@
-﻿@model List<TreeViewModel>
+﻿@model TreeViewModel
+@{
+	var trees = ViewBag.Trees as List<Tree>;
+}
 
-	<h2>Park Trees</h2>
-<div style="display:flex; flex-wrap:wrap">
-	@foreach (var tree in Model)
-	{
-		<div class="tree-item" style="margin: 10px; border: 1px solid #ccc; padding: 10px; width: 200px;">
-			<img src="@tree.IconPath" alt="@tree.TreeName" width="40" />
-            <p><strong>@tree.TreeName</strong> </p>
-			<span style="color:@tree.Color">@tree.Color</span>
-			<p>Lat: @tree.Latitude</p>
-			<p>Long: @tree.Longitude</p>
-			
-		</div>
-	}
-</div>
+
+<h2>Add a new Tree</h2>
+
+<form asp-action="Index" method="post">
+	<label>Species:</label>
+	<select asp-for="Species">
+		@foreach (var species in Model.AvailableSpecies)
+		{
+			<option value="@species">@species</option>
+		}
+	</select><br />
+	<label>Latitude:</label>
+	<input asp-for="Latitude" type="number" step="0.0001" /><br />
+	<label>Longitude:</label>
+	<input asp-for="Longitude" type="number" step="0.0001" /><br />
+	<button type="submit">Add Tree</button>
+</form>
+
+<h2>List of Trees</h2>
+@if (trees != null && trees.Any())
+{
+	<div style="display:flex; flex-wrap:wrap">
+		@foreach (var tree in trees)
+		{
+			<div style="margin: 10px; padding: 10px; border: 1px solid #ccc;">
+				<img src="@tree.Type.IconPath" alt="@tree.Type.Name" width="40" />
+				<p><strong>@tree.Type.Name</strong> (<span style="color:@tree.Type.Color">@tree.Type.Color</span>)</p>
+				<p>Lat: @tree.Latitude</p>
+				<p>Lng: @tree.Longitude</p>
+			</div>
+		}
+	</div>
+}
+else
+{
+<p>No trees yet</p>
+}
