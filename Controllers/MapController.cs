@@ -32,7 +32,7 @@ namespace FlyweightWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _treeService.AddTree(model.Species, model.Latitude, model.Longitude);
+                _treeService.AddTree(model.Species, model.Latitude.Value, model.Longitude.Value);
                 return RedirectToAction("Index");
             }
 
