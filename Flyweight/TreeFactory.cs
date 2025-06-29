@@ -19,5 +19,9 @@ namespace FlyweightWebApp.Flyweight
             }
             return _treeType[key];
         }
-    }
+
+        public IEnumerable<TreeType> GetAvailableTypes()
+        {
+            return _treeType.Values;
+        }
 }

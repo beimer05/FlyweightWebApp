@@ -21,7 +21,7 @@ namespace FlyweightWebApp.Services
                 new Tree { Latitude = 34.0522, Longitude = -118.2437, Type = _treeFactory.GetTreeType("Maple","Brown","~/image/Maple.png") },
                 new Tree { Latitude = 34.0522, Longitude = -118.2437, Type = _treeFactory.GetTreeType("Oak","Green","~/image/Oak.png") },
                 new Tree { Latitude = 34.0522, Longitude = -118.2437, Type = _treeFactory.GetTreeType("Pine","DarkGreen","~/image/Pine.png") }
-            }
+            };
            
         }
     }
