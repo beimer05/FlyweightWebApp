@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ITreeService, TreeService>();
+builder.Services.AddSingleton<ITreeService, TreeService>();
 
 var app = builder.Build();
 
