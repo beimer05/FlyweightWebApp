@@ -5,13 +5,13 @@ namespace FlyweightWebApp.Flyweight
 {
     public class TreeFactory
     {
-        private readonly ConcurrentDictionary<string, TreeType> _treeTypes = new Dictionary<string, TreeType>();
+        private readonly ConcurrentDictionary<string, TreeType> _treeTypes = new ConcurrentDictionary<string, TreeType>();
 
         public TreeType GetTreeType(string name, string color, string iconPath)
         {
             string key = $"{name}-{color}-{iconPath}";
-          
-            return _treeTypes.GetOrAdd(key,_=> new TreeType
+
+            return _treeTypes.GetOrAdd(key, _ => new TreeType
             {
                 Name = name,
                 Color = color,
@@ -25,3 +25,4 @@ namespace FlyweightWebApp.Flyweight
             return _treeTypes.Values;
         }
     }
+}
