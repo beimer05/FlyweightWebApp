@@ -13,19 +13,32 @@ namespace FlyweightWebApp.Controllers
         {
             _treeService = treeService;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            var treeEntities = _treeService.GetAllTrees();
-            var viewModel = treeEntities.Select(tree => new TreeViewModel
+            
+            var viewModel = new TreeViewModel
             {
-                Latitude= tree.Latitude,
-                Longitude= tree.Longitude,
-                TreeName= tree.Type.Color,
-                Color= tree.Type.Color,
-                IconPath = tree.Type.IconPath,
-               
-            }).ToList();
+                AvailableSpecies = _treeService.GetAvailableSpecies()
+            };
+
+            ViewBag.Trees = _treeService.GetAllTrees();
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index(TreeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _treeService.AddTree(model.Species, model.Latitude, model.Longitude);
+                return RedirectToAction("Index");
+            }
+
+            model.AvailableSpecies = _treeService.GetAvailableSpecies();
+            ViewBag.Trees = _treeService.GetAllTrees();
+            return View(model);
         }
     }
 }
