@@ -1,27 +1,27 @@
 ﻿using FlyweightWebApp.Models;
+using System.Collections.Concurrent;
 
 namespace FlyweightWebApp.Flyweight
 {
     public class TreeFactory
     {
-        private readonly Dictionary<string, TreeType> _treeType = new Dictionary<string, TreeType>();
+        private readonly ConcurrentDictionary<string, TreeType> _treeTypes = new Dictionary<string, TreeType>();
+
         public TreeType GetTreeType(string name, string color, string iconPath)
         {
-            var key = $"{name}-{color}-{iconPath}";
-            if (!_treeType.ContainsKey(key))
+            string key = $"{name}-{color}-{iconPath}";
+          
+            return _treeTypes.GetOrAdd(key,_=> new TreeType
             {
-                _treeType[key] = new TreeType
-                {
-                    Name = name,
-                    Color = color,
-                    IconPath = iconPath
-                };
-            }
-            return _treeType[key];
+                Name = name,
+                Color = color,
+                IconPath = iconPath
+
+            }); // Replace GetOrAdd with direct dictionary access  
         }
 
         public IEnumerable<TreeType> GetAvailableTypes()
         {
-            return _treeType.Values;
+            return _treeTypes.Values;
         }
-}
+    }
