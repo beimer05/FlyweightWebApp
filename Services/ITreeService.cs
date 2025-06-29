@@ -4,6 +4,8 @@ namespace FlyweightWebApp.Services
 {
     public interface ITreeService
     {
-        IEnumerable<Tree> GetAllTrees();
+        void AddTree(string species, double latitude, double longitude);
+        List<Tree> GetAllTrees();
+        List<string> GetAvailableSpecies();
     }
 }
